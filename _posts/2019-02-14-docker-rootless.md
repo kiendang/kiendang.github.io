@@ -9,9 +9,8 @@ Docker containers can be run without root privilege using [usernetes](https://gi
 
 - [rootless containers using usernetes](#running-rootless-containers-using-usernetes)
 - [nvidia-docker](#nvidia-docker)
-  - [Preparation](#preparation)
-    - [Quick way (require root to set up)](#quick-way)
-    - [Long way (root not required) *incomplete*](#long-but-does-not-require-root-to-set-up)
+  - [Get nvidia-docker](#get-nvidia-docker)
+  - [Configure nvidia-docker for running rootless containers](#configure-nvidia-docker-for-running-rootless-containers)
   - [Run rootless containers with nvidia runtime](#run-rootless-containers-with-nvidia-runtime)
 
 ## Running rootless containers using usernetes
@@ -48,21 +47,19 @@ If you don't
 
 Need some tweaks for this to work with `nvidia-docker`
 
-### Preparation
+### Get nvidia-docker
 
-#### Quick way
+If you already have `nvidia-docker` already installed system-wide, continue to [the next section](#configure-nvidia-docker-for-running-rootless-containers)
 
-Required:
-- Have `nvidia-docker` installed system-wide
-- A small favor from your sysadmin
+*to be updated*
+
+### Configure nvidia-docker for running rootless containers
+
+In case you can ask for a small favor from your sysadmin:
 
 Open `/etc/nvidia-container-runtime/config.toml`, find the line that says `#no-cgroups = false`, uncomment it and set to `true`, i.e `no-cgroups = true`
 
-#### Long (but does not require root to set up)
-
-##### Install `nvidia-container-runtime`
-
-Create a `config.toml` file with the following content
+If not, create a `config.toml` file with the following content
 
 ```toml
 disable-require = false
@@ -80,25 +77,16 @@ no-cgroups = true
 ldconfig = "@/sbin/ldconfig.real"
 ```
 
-Getting `nvidia-container-runtime`
+Create a `nvidia-container-runtime-hook` file:
 
-```bash
-git clone --depth 1 https://github.com/NVIDIA/nvidia-container-runtime.git
-cd nvidia-container-runtime
+```sh
+#!/bin/sh
+
+/usr/bin/nvidia-container-runtime-hook -config=<path-to-your-config.toml-file> "$@"
 ```
 
-Edit `./hook/nvidia-container-runtime-hook/hook_config.go`. Find the line that says `configPath = "/etc/nvidia-container-runtime/config.toml"`, point it to the `config.toml` file you created earlier.
-
-Compile `nvidia-container-runtime`
-
-```bash
-# make <your_distro>
-make ubuntu16.04
-```
-
-Take a look at the `Makefile` for supported distros.
-
-*to be updated*
+make it executable `chmod +x nvidia-container-runtime-hook` and prepend the directory that contains this file to your `PATH`. 
+E.g, assume you put this file in `~/bin`, add this line to your `.bashrc` or `.zshrc`: `export PATH=~/bin:$PATH`
 
 ### Run rootless containers with nvidia runtime
 
