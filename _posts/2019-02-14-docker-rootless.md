@@ -82,7 +82,7 @@ Create a `nvidia-container-runtime-hook` file:
 ```sh
 #!/bin/sh
 
-/usr/bin/nvidia-container-runtime-hook -config=<path-to-your-config.toml-file> "$@"
+/usr/bin/nvidia-container-runtime-hook -config=<absolute-path-to-config.toml> "$@"
 ```
 
 make it executable `chmod +x nvidia-container-runtime-hook` and prepend the directory that contains this file to your `PATH`. 
@@ -124,7 +124,7 @@ or create a `config.json` file with the following content
 }
 ```
 
-and change the command to `./boot/dockerd.sh --config-file="<path-to-config-file>"`
+and change the command to `./boot/dockerd.sh --config-file="<absolute-path-to-config-file>"`
 
 #### Run dockerd server
 
