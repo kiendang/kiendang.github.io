@@ -9,7 +9,7 @@ Docker containers can be run without root privilege using [usernetes](https://gi
 
 - [rootless containers using usernetes](#running-rootless-containers-using-usernetes)
 - [nvidia-docker](#nvidia-docker)
-  - [Get nvidia-docker *\*incomplete*\*](#get-nvidia-docker)
+  - [Get nvidia-docker](#get-nvidia-docker)
   - [Configure nvidia-docker for running rootless containers](#configure-nvidia-docker-for-running-rootless-containers)
   - [Run rootless containers with nvidia runtime](#run-rootless-containers-with-nvidia-runtime)
 
@@ -52,7 +52,16 @@ Need some tweaks for this to work with `nvidia-docker`
 
 If you already have `nvidia-docker` already installed system-wide, continue to [the next section](#configure-nvidia-docker-for-running-rootless-containers)
 
-*\*to be updated\**
+*\*UNTESTED\**
+
+If not, you need to get `nvidia-container-runtime`, `nvidia-container-runtime-hook`, `libnvidia-container` and `libnvidia-container-tools`. You can either download prebuilt packages:
+
+<https://nvidia.github.io/nvidia-container-runtime/centos7/x86_64/nvidia-container-runtime-2.0.0-1.docker18.03.0.x86_64.rpm>  
+<https://nvidia.github.io/nvidia-container-runtime/centos7/x86_64/nvidia-container-runtime-hook-1.3.0-1.x86_64.rpm>  
+<https://nvidia.github.io/libnvidia-container/centos7/x86_64/libnvidia-container1-1.0.0-0.1.beta.1.x86_64.rpm>  
+<https://nvidia.github.io/libnvidia-container/centos7/x86_64/libnvidia-container-tools-1.0.0-0.1.beta.1.x86_64.rpm>  
+
+(urls may vary depending on version and distro) or build from source, more details [here](https://github.com/NVIDIA/nvidia-container-runtime). Either way, put the binaries somewhere in your `PATH`.
 
 ### Configure nvidia-docker for running rootless containers
 
