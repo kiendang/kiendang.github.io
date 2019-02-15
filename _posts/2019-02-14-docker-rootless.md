@@ -16,9 +16,10 @@ Docker containers can be run without root privilege using [usernetes](https://gi
 ## Running rootless containers using usernetes
 
 ```bash
-git clone --depth 1 https://github.com/rootless-containers/usernetes.git
+# grab a build from https://github.com/rootless-containers/usernetes/releases
+wget https://github.com/rootless-containers/usernetes/releases/download/v20190212.0/usernetes-x86_64.tbz
+tar xjvf usernetes-x86_64.tbz
 cd usernetes
-make
 ```
 
 Run `dockerd` server
@@ -93,9 +94,10 @@ E.g, assume you put this file in `~/bin`, add this line to your `.bashrc` or `.z
 #### Install `usernetes` if you haven't
 
 ```bash
-git clone --depth 1 https://github.com/rootless-containers/usernetes.git
+# grab a build from https://github.com/rootless-containers/usernetes/releases
+wget https://github.com/rootless-containers/usernetes/releases/download/v20190212.0/usernetes-x86_64.tbz
+tar xjvf usernetes-x86_64.tbz
 cd usernetes
-make
 ```
 
 #### Register `nvidia` runtime
