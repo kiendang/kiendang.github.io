@@ -9,7 +9,7 @@ Docker containers can be run without root privilege using [usernetes](https://gi
 
 - [rootless containers using usernetes](#running-rootless-containers-using-usernetes)
 - [nvidia-docker](#nvidia-docker)
-  - [Get nvidia-docker](#get-nvidia-docker)
+  - [Get nvidia-docker *\*incomplete*\*](#get-nvidia-docker)
   - [Configure nvidia-docker for running rootless containers](#configure-nvidia-docker-for-running-rootless-containers)
   - [Run rootless containers with nvidia runtime](#run-rootless-containers-with-nvidia-runtime)
 
@@ -51,13 +51,13 @@ Need some tweaks for this to work with `nvidia-docker`
 
 If you already have `nvidia-docker` already installed system-wide, continue to [the next section](#configure-nvidia-docker-for-running-rootless-containers)
 
-*to be updated*
+*\*to be updated\**
 
 ### Configure nvidia-docker for running rootless containers
 
 In case you can ask for a small favor from your sysadmin:
 
-Open `/etc/nvidia-container-runtime/config.toml`, find the line that says `#no-cgroups = false`, uncomment it and set to `true`, i.e `no-cgroups = true`
+Open `/etc/nvidia-container-runtime/config.toml`, find the line that says `#no-cgroups = false`, uncomment it and set to `true`, i.e `no-cgroups = true`, continue to [the next section](#run-rootless-containers-with-nvidia-runtime)
 
 If not, create a `config.toml` file with the following content
 
