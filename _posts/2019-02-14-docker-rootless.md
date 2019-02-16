@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "Run docker containers without root privilege"
+title:  "docker and nvidia-docker without root privilege"
 date:   2019-02-14 18:32:04 +0800
 categories: jekyll update
 ---
 
-Docker containers can be run without root privilege using [usernetes](https://github.com/rootless-containers/usernetes). This will be available in upstream `docker` soon™ following [moby/moby#38050](https://github.com/moby/moby/pull/38050). Use this guide for now.
+Docker containers can be run without root privilege using [usernetes](https://github.com/rootless-containers/usernetes). This will be available in upstream docker soon™ following [moby/moby#38050](https://github.com/moby/moby/pull/38050). Use this guide for now.
 
 *NOTE: In order to run this, user must have a range of [subuid(5)](http://man7.org/linux/man-pages/man5/subuid.5.html)s and [subgid(5)](http://man7.org/linux/man-pages/man5/subgid.5.html)s available to them, i.e they must be present in `/etc/subuid` and `/etc/subgid`. subuid and subgid range can be added by editting `/etc/subuid` and `/etc/subgid` directly or by running `sudo usermod --add-subuids <from>-<to> --add-subgids <from>-<to> <user>`, e.g `sudo usermod --add-subuids 10000-65536 --add-subgids 10000-65536 user`*
 
@@ -24,7 +24,7 @@ tar xjvf usernetes-x86_64.tbz
 cd usernetes
 ```
 
-Run `dockerd` server
+Run dockerd server
 
 ```bash
 ./run.sh default-docker-nokube
@@ -32,7 +32,7 @@ Run `dockerd` server
 
 You can now run rootless containers.
 
-If you already have upstream `docker` installed system-wide
+If you already have upstream docker installed system-wide
 
 ```bash
 # docker -H unix://$XDG_RUNTIME_DIR/docker.sock <cmd>
@@ -48,11 +48,11 @@ If you don't
 
 ## nvidia-docker
 
-Need some tweaks for this to work with `nvidia-docker`
+You will need to disable `cgroup` in `nvidia-container-runtime` since `cgroup` is not yet supported in docker rootless mode.
 
 ### Get nvidia-docker
 
-If you already have `nvidia-docker` installed, continue to [the next section](#configure-nvidia-docker-for-running-rootless-containers).
+If you already have `nvidia-docker` installed, continue to [next step](#configure-nvidia-docker-for-running-rootless-containers).
 
 *\*UNTESTED\**
 
@@ -67,9 +67,9 @@ If not, you need to get `nvidia-container-runtime`, `nvidia-container-runtime-ho
 
 ### Configure nvidia-docker for running rootless containers
 
-In case you can ask for a small favor from your sysadmin:
+`cgroup` needs to be switched off in `nvidia-container-runtime`.
 
-Open `/etc/nvidia-container-runtime/config.toml`, find the line that says `#no-cgroups = false`, uncomment it and set to `true`, i.e `no-cgroups = true`, continue to [the next section](#run-rootless-containers-with-nvidia-runtime).
+In case you can ask for a small favor from your sysadmin, just need to find the line that says `#no-cgroups = false` in `/etc/nvidia-container-runtime/config.toml`, uncomment it and set to `true`, i.e `no-cgroups = true`, then continue to [next step](#run-rootless-containers-with-nvidia-runtime).
 
 If not, create a `config.toml` file with the following content
 
@@ -127,7 +127,6 @@ or create a `config.json` file with the following content
 
 ```json
 {
-    "experimental": true,
     "runtimes": {
         "nvidia": {
             "path": "/usr/bin/nvidia-container-runtime",
