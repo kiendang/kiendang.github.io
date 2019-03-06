@@ -17,7 +17,7 @@ Docker containers can be run without root privilege using [usernetes](https://gi
 
 ## Running rootless containers using usernetes
 
-```bash
+```sh
 # grab a build from https://github.com/rootless-containers/usernetes/releases
 wget https://github.com/rootless-containers/usernetes/releases/download/v20190212.0/usernetes-x86_64.tbz
 tar xjvf usernetes-x86_64.tbz
@@ -26,7 +26,7 @@ cd usernetes
 
 Run dockerd server
 
-```bash
+```sh
 ./run.sh default-docker-nokube
 ```
 
@@ -34,14 +34,21 @@ You can now run rootless containers.
 
 If you already have upstream docker installed system-wide
 
-```bash
+```sh
 # docker -H unix://$XDG_RUNTIME_DIR/docker.sock <cmd>
 docker -H unix://$XDG_RUNTIME_DIR/docker.sock run --rm -it busybox ls
 ```
 
+or
+
+```sh
+export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
+docker run --rm -it busybox ls
+```
+
 If you don't
 
-```bash
+```sh
 # ./dockercli.sh <cmd>
 ./dockercli.sh run --rm -it busybox ls
 ```
@@ -104,7 +111,7 @@ E.g, assume you put this file in `~/bin`, add this line to your `.bashrc` or `.z
 
 #### Install `usernetes` if you haven't
 
-```bash
+```sh
 # grab a build from https://github.com/rootless-containers/usernetes/releases
 wget https://github.com/rootless-containers/usernetes/releases/download/v20190212.0/usernetes-x86_64.tbz
 tar xjvf usernetes-x86_64.tbz
@@ -140,18 +147,25 @@ and change the command to `./boot/dockerd.sh --config-file="<absolute-path-to-co
 
 #### Run dockerd server
 
-```bash
+```sh
 ./run.sh default-docker-nokube
 ```
 
 #### Run docker client
 
-```bash
+```sh
 docker -H unix://$XDG_RUNTIME_DIR/docker.sock run --runtime=nvidia --rm -it nvidia/cuda:10.0-devel nvidia-smi
 ```
 
 or
 
-```bash
+```sh
+export DOCKER_HOST="unix://$XDG_RUNTIME_DIR/docker.sock"
+docker run --runtime=nvidia --rm -it nvidia/cuda:10.0-devel nvidia-smi
+```
+
+or
+
+```sh
 ./dockercli.sh run --runtime=nvidia --rm -it nvidia/cuda:10.0-devel nvidia-smi
 ```
