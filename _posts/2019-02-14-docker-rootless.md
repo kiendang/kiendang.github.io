@@ -65,10 +65,10 @@ If you already have `nvidia-docker` installed, continue to [next step](#configur
 
 If not, you need to get `nvidia-container-runtime`, `nvidia-container-runtime-hook`, `libnvidia-container` and `libnvidia-container-tools`. You can either download prebuilt packages:
 
-<https://nvidia.github.io/nvidia-container-runtime/centos7/x86_64/nvidia-container-runtime-2.0.0-1.docker18.03.0.x86_64.rpm>  
-<https://nvidia.github.io/nvidia-container-runtime/centos7/x86_64/nvidia-container-runtime-hook-1.3.0-1.x86_64.rpm>  
-<https://nvidia.github.io/libnvidia-container/centos7/x86_64/libnvidia-container1-1.0.0-0.1.beta.1.x86_64.rpm>  
-<https://nvidia.github.io/libnvidia-container/centos7/x86_64/libnvidia-container-tools-1.0.0-0.1.beta.1.x86_64.rpm>  
+<https://nvidia.github.io/nvidia-container-runtime/centos7/x86_64/nvidia-container-runtime-2.0.0-1.docker18.09.3.x86_64.rpm>  
+<https://nvidia.github.io/nvidia-container-runtime/centos7/x86_64/nvidia-container-runtime-hook-1.4.0-2.x86_64.rpm>  
+<https://nvidia.github.io/libnvidia-container/centos7/x86_64/libnvidia-container1-1.0.1-1.x86_64.rpm>  
+<https://nvidia.github.io/libnvidia-container/centos7/x86_64/libnvidia-container-tools-1.0.1-1.x86_64.rpm>  
 
 (urls may vary depending on version and distro) or build from source, more details [here](https://github.com/NVIDIA/nvidia-container-runtime). Either way, put the binaries somewhere in your `PATH`.
 
