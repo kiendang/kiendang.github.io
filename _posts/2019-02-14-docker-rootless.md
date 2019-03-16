@@ -104,8 +104,7 @@ Create a `nvidia-container-runtime-hook` file:
 /usr/bin/nvidia-container-runtime-hook -config=<absolute-path-to-config.toml> "$@"
 ```
 
-make it executable `chmod +x nvidia-container-runtime-hook` and prepend the directory that contains this file to your `PATH`. 
-E.g, assume you put this file in `~/bin`, add this line to your `.bashrc` or `.zshrc`: `export PATH=~/bin:$PATH`
+make it executable `chmod +x nvidia-container-runtime-hook` and put it under `usernetes/bin`.
 
 ### Run rootless containers with nvidia runtime
 
