@@ -99,9 +99,9 @@ Create a `nvidia-container-runtime-hook` file under `usernetes/bin`
 /usr/bin/nvidia-container-runtime-hook -config=<absolute-path-to-config.toml> "$@"
 ```
 
-*The `#!/bin/sh` is important here. Without it you'll probably get an error that contains something like `exec format error`*
-
 and make it executable `chmod +x nvidia-container-runtime-hook`.
+
+*The `#!/bin/sh` is important here. Without it you'll probably get an error that contains something like `exec format error`*.
 
 ### Run rootless containers leveraging NVIDIA GPUs
 
