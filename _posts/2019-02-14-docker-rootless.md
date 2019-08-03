@@ -69,11 +69,9 @@ or build from source, more details [here](https://github.com/NVIDIA/nvidia-conta
 
 ### Configure NVIDIA Container Toolkit for rootless containers
 
-`cgroup` needs to be switched off in `nvidia-container-runtime`.
+`cgroup` needs to be switched off in `nvidia-container-toolkit`.
 
-In case you can ask for a small favor from your sysadmin, just need to find the line that says `#no-cgroups = false` in `/etc/nvidia-container-runtime/config.toml`, uncomment it and set to `true`, i.e `no-cgroups = true`, then continue to [next step](#run-rootless-containers-leveraging-nvidia-gpus).
-
-If not, create a `config.toml` file with the following content
+Create a `config.toml` file with the following content
 
 ```toml
 disable-require = false
@@ -107,7 +105,7 @@ and make it executable `chmod +x nvidia-container-runtime-hook`.
 
 #### Register `nvidia` runtime
 
-Create a config file at `~/.config/docker/daemon.json` with the following content:
+Create a config file at `~/.config/docker/daemon.json` with the following content
 
 ```json
 {
