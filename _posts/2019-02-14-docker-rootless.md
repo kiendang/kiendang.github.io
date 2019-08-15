@@ -5,6 +5,8 @@ date:   2019-02-14 18:32:04 +0800
 categories: jekyll update
 ---
 
+*Last updated: Aug 04, 2019*
+
 Docker containers can be run without root privilege using [usernetes](https://github.com/rootless-containers/usernetes). This will be available in upstream Docker soon™ following [moby/moby#38050](https://github.com/moby/moby/pull/38050). Use this guide for now.
 
 *NOTE: In order to run this, user must have a range of [subuid(5)](http://man7.org/linux/man-pages/man5/subuid.5.html)s and [subgid(5)](http://man7.org/linux/man-pages/man5/subgid.5.html)s available to them, i.e they must be present in `/etc/subuid` and `/etc/subgid`. subuid and subgid range can be added by editting `/etc/subuid` and `/etc/subgid` directly or by running `sudo usermod --add-subuids <from>-<to> --add-subgids <from>-<to> <user>`, e.g `sudo usermod --add-subuids 65536-100000 --add-subgids 65536-100000 user`*
