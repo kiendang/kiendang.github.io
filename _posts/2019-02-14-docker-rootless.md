@@ -5,7 +5,7 @@ date:   2019-02-14 18:32:04 +0800
 categories: jekyll update
 ---
 
-*Last updated: Aug 04, 2019*
+*Last updated: Oct 01, 2019*
 
 Docker containers can be run without root privilege using [usernetes](https://github.com/rootless-containers/usernetes). This will be available in upstream Docker soon™ following [moby/moby#38050](https://github.com/moby/moby/pull/38050). Use this guide for now.
 
@@ -57,7 +57,7 @@ If you don't
 
 ## Rootless containers leveraging NVIDIA GPUs
 
-You will need to disable `cgroup` in `nvidia-container-runtime` since `cgroup` is not yet supported in Docker rootless mode.
+You will need to disable `cgroups` in `nvidia-container-runtime` since it is not yet supported in Docker rootless mode.
 
 ### Get NVIDIA Container Toolkit
 
@@ -71,7 +71,7 @@ or build from source, more details [here](https://github.com/NVIDIA/nvidia-conta
 
 ### Configure NVIDIA Container Toolkit for rootless containers
 
-`cgroup` needs to be switched off in `nvidia-container-toolkit`.
+`cgroups` needs to be switched off in `nvidia-container-toolkit`.
 
 Create a `config.toml` file with the following content
 
